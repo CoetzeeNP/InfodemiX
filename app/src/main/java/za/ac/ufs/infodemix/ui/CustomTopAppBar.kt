@@ -23,7 +23,7 @@ fun CustomTopAppBar(title: String, modifier: Modifier = Modifier) {
                 Text(
                     title,
                     color = Color.White,
-                    fontSize = 35.sp,
+                    fontSize = 40.sp,
                     modifier = Modifier
                         .align(Alignment.Center)
                 )

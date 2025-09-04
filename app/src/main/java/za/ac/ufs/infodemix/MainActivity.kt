@@ -100,7 +100,7 @@ class MainActivity : ComponentActivity() {
         }
 
         Scaffold(
-            topBar = { CustomTopAppBar("Infodemix") }
+            topBar = { CustomTopAppBar("InfodemiX") }
         ) { paddingValues ->
             Box(
                 modifier = Modifier
@@ -166,7 +166,6 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(10.dp)
-                            .heightIn(min = 100.dp)
                             .focusRequester(emailFocusRequester),
                         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
                         keyboardActions = KeyboardActions(
@@ -185,8 +184,7 @@ class MainActivity : ComponentActivity() {
                         label = { Text("Where you witnessed the rumour.") },
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(10.dp)
-                            .heightIn(min = 100.dp),
+                            .padding(10.dp),
                         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
                         keyboardActions = KeyboardActions(
                             onDone = {
