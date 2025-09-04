@@ -5,6 +5,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,11 +17,13 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
@@ -36,11 +40,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
@@ -105,19 +113,8 @@ class MainActivity : ComponentActivity() {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-            ) {
-                // ✅ Background image
-                Image(
-                    painter = painterResource(id = R.drawable.bg), // replace with your drawable
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier.fillMaxSize(),
-                    colorFilter = ColorFilter.tint(
-                        Color(0x95000000),
-                        blendMode = BlendMode.Darken
-                    )
-                )
-            }
+                    .background(Color(0xFF0D47A1)) // Replace with your desired color
+            )
 
             Column(
                 modifier = Modifier
@@ -134,7 +131,10 @@ class MainActivity : ComponentActivity() {
                 Image(
                     painter = painterResource(id = R.drawable.ufs_icdf), // replace with your drawable
                     contentDescription = null,
-                    contentScale = ContentScale.Fit
+                    contentScale = ContentScale.Fit,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(12.dp))
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
@@ -146,7 +146,6 @@ class MainActivity : ComponentActivity() {
 //                    )
 //                }
 
-                Spacer(modifier = Modifier.height(10.dp))
 
                 Card {
                     Text(
@@ -155,14 +154,14 @@ class MainActivity : ComponentActivity() {
                     )
                 }
 
-                Spacer(modifier = Modifier.height(10.dp))
+                Spacer(modifier = Modifier.height(16.dp))
 
                 Card {
 
                     OutlinedTextField(
                         value = email,
                         onValueChange = { email = it },
-                        label = { Text("Please enter you e-mail address here.") },
+                        label = { Text("Please enter your email address here.") },
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(10.dp)
@@ -201,7 +200,7 @@ class MainActivity : ComponentActivity() {
                         onValueChange = { rumour = it },
                         label = { Text("What was the rumour in question?") },
                         modifier = Modifier.fillMaxWidth().padding(10.dp)
-                            .heightIn(min = 100.dp),
+                            .heightIn(min = 175.dp),
                         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
                         keyboardActions = KeyboardActions(
                             onDone = {
@@ -210,12 +209,13 @@ class MainActivity : ComponentActivity() {
                             }
                         )
                     )
+
+                    Spacer(modifier = Modifier.height(8.dp))
                 }
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(30.dp))
 
                 Button(
-
                     onClick = {
                         emailFocusRequester.requestFocus()
                         val rumourData = hashMapOf(
@@ -248,7 +248,11 @@ class MainActivity : ComponentActivity() {
                     },
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(56.dp)
+                        .height(56.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color(0xFF5472D3), // Solid dark blue background
+                        contentColor = Color.White // White text color
+                    )
                 ) {
                     Text(
                         "Submit",
